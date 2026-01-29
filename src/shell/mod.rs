@@ -248,15 +248,27 @@ impl Shell {
             lines.push(line.clone());
         }
 
-        // Add current input line with cursor
-        let prompt = self.get_prompt();
+        // Add current input line with cursor - multi-color prompt
         let before_cursor: String = self.input_buffer.chars().take(self.cursor_pos).collect();
         let cursor_char = self.input_buffer.chars().nth(self.cursor_pos).unwrap_or(' ');
         let after_cursor: String = self.input_buffer.chars().skip(self.cursor_pos + 1).collect();
 
         lines.push(Line::from(vec![
-            Span::styled(prompt, Style::default().fg(Theme::SECONDARY)),
+            // User: green
+            Span::styled("guest", Style::default().fg(Theme::GUEST)),
+            // @ symbol: muted
+            Span::styled("@", Style::default().fg(Theme::SECONDARY)),
+            // Host: primary color
+            Span::styled("uchindami", Style::default().fg(Theme::SECONDARY)),
+            // Colon: muted
+            Span::styled(":", Style::default().fg(Theme::MUTED)),
+            // Path: secondary/coral
+            Span::styled(&self.cwd, Style::default().fg(Theme::SECONDARY)),
+            // Dollar sign: warning/gold
+            Span::styled("$ ", Style::default().fg(Theme::SECONDARY)),
+            // User input
             Span::raw(before_cursor),
+            // Cursor
             Span::styled(
                 cursor_char.to_string(),
                 Style::default().bg(Theme::SUCCESS).fg(Theme::BACKGROUND),

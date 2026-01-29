@@ -1,0 +1,84 @@
+---
+import {
+    PiBrowserDuotone,
+    PiDeviceMobileDuotone,
+    PiDesktopDuotone,
+    PiTerminalDuotone,
+} from "react-icons/pi";
+
+const services = [
+    {
+        title: "Web Development",
+        description: "",
+        icon: PiBrowserDuotone,
+        skills: ["React", "Astro", "Node.js", "Django", "Tailwind", "Next.js"],
+        className: "wide",
+    },
+    {
+        title: "Mobile Apps",
+        description: "",
+        icon: PiDeviceMobileDuotone,
+        skills: ["React Native", "Kotlin", "Java", "SwiftUI"],
+        className: "tall",
+    },
+    {
+        title: "Desktop Solutions",
+        description: "",
+        icon: PiDesktopDuotone,
+        skills: ["Electron", "JavaFX", ".NET Core"],
+        className: "",
+    },
+    {
+        title: "System Scripting",
+        description: "",
+        icon: PiTerminalDuotone,
+        skills: ["Python", "Bash", "Node.js", "C"],
+        className: "",
+    },
+];
+---
+
+<section class="services_section" id="services">
+    <div class="container">
+        <h1 class="section__title reveal">Services & Skills</h1>
+        <span class="section__subtitle reveal delay-1"
+            >What I offer and My abilities</span
+        >
+        <div class="p-10"></div>
+        <div class="services__grid">
+            {
+                services.map((service, index) => (
+                    <div
+                        class={`services__card ${service.className} reveal delay-${index + 2}`}
+                    >
+                        <service.icon className="services__icon" />
+                        <h3 class="services__title">{service.title}</h3>
+                        <p class="services__description">
+                            {service.description}
+                        </p>
+                        <div class="services__skills">
+                            {service.skills.map((skill) => (
+                                <span class="service_skill">{skill}</span>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    // Reveal Glow effect following mouse
+    document
+        .querySelectorAll<HTMLElement>(".services__card")
+        .forEach((card) => {
+            card.addEventListener("mousemove", (e: MouseEvent) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            });
+        });
+</script>

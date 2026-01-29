@@ -1,0 +1,44 @@
+---
+/**
+ * Home Page
+ * Main landing page for the portfolio
+ */
+import Layout from "../layouts/Layout.astro";
+import "../styles/home.css";
+
+// Static Components (no hydration needed)
+import AboutMe from "../components/pages/AboutMe.astro";
+import Services from "../components/pages/Services.astro";
+import ProjectInMind from "../components/pages/ProjectInMind.astro";
+import Footer from "../components/pages/Footer.astro";
+import HeroSection from "../components/pages/HeroSection.astro";
+
+// Interactive Components (need hydration)
+import Portfolio from "../components/portfolio/Portfolio.astro";
+import ContactMe from "../components/pages/ContactMe";
+import FloatingNavBar from "../components/ui/floating-nav-bar";
+---
+
+<Layout
+  title="Uchindami - FullStack Developer"
+  description="Welcome to my digital playground. I'm Uchindami, a passionate FullStack Developer creating unique and memorable digital experiences."
+  page="home"
+>
+  <main>
+    <HeroSection />
+
+    <AboutMe />
+
+    <Services />
+
+    <Portfolio />
+
+    <ProjectInMind />
+
+    <ContactMe client:visible />
+
+    <Footer />
+  </main>
+
+  <FloatingNavBar client:idle />
+</Layout>

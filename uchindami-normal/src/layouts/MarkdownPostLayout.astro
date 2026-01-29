@@ -1,0 +1,197 @@
+---
+/**
+ * Markdown Post Layout
+ * Layout for individual blog posts
+ */
+import SEOMeta from "../components/shared/SEOMeta.astro";
+import { Toaster } from "../components/ui/sonner";
+import FloatingNavBar from "../components/ui/floating-nav-bar";
+import "../styles/global.css";
+import "../styles/blogStyles.css";
+import UmamiAnalytics from "@/components/shared/UmamiAnalytics.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    pubDate: string | Date;
+    description: string;
+    author: string;
+    tags?: string[];
+    image?: {
+      url: string;
+      alt: string;
+    };
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString(
+  "en-US",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  },
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#D8D2C2" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Mono:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <UmamiAnalytics />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <SEOMeta
+      title={frontmatter.title}
+      description={frontmatter.description}
+      type="article"
+    />
+  </head>
+  <body class="blog-scrollbar bg-blog-bento_bg">
+    <article class="blog-post">
+      <header class="blog-post__header">
+        <h1 class="blog-post__title">{frontmatter.title}</h1>
+        <div class="blog-post__meta">
+          <time datetime={new Date(frontmatter.pubDate).toISOString()}>
+            {formattedDate}
+          </time>
+          <span class="blog-post__author">by {frontmatter.author}</span>
+        </div>
+        {
+          frontmatter.description && (
+            <p class="blog-post__description">{frontmatter.description}</p>
+          )
+        }
+      </header>
+
+      {
+        frontmatter.image && (
+          <figure class="blog-post__image">
+            <img
+              src={frontmatter.image.url}
+              alt={frontmatter.image.alt}
+              loading="eager"
+            />
+          </figure>
+        )
+      }
+
+      <div class="blog-post__content prose">
+        <slot />
+      </div>
+
+      {
+        frontmatter.tags && frontmatter.tags.length > 0 && (
+          <footer class="blog-post__tags">
+            <span class="sr-only">Tags:</span>
+            {frontmatter.tags.map((tag) => (
+              <a href={`/tags/${tag}`} class="blog-post__tag">
+                {tag}
+              </a>
+            ))}
+          </footer>
+        )
+      }
+    </article>
+
+    <FloatingNavBar variant="blog" client:idle />
+    <Toaster client:idle />
+  </body>
+</html>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .blog-post__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .blog-post__title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--color-blog-secondary, #1e1e1e);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .blog-post__meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-blog-third, #969696);
+    margin-bottom: 1rem;
+  }
+
+  .blog-post__description {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-blog-third, #696969);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .blog-post__image {
+    margin: 2rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .blog-post__image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .blog-post__content {
+    line-height: 1.8;
+  }
+
+  .blog-post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .blog-post__tag {
+    padding: 0.25rem 0.75rem;
+    background-color: #f0f0f0;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: #555;
+    transition: background-color 0.2s;
+  }
+
+  .blog-post__tag:hover {
+    background-color: #e0e0e0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

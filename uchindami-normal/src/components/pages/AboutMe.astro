@@ -1,0 +1,74 @@
+---
+/**
+ * About Me Section
+ * Static component
+ */
+import { PiDownloadDuotone } from "react-icons/pi";
+import HumanOnDesk from "@/assets/icons/human-on-desk.astro";
+
+interface Stat {
+    value: string;
+    label: string;
+}
+
+const stats: Stat[] = [
+    { value: "4+", label: "Years Experience" },
+    { value: "10+", label: "Completed Projects" },
+    { value: "3", label: "Companies Worked" },
+];
+
+const resumePdf = "/resume/RESUME2024OctV1.pdf";
+---
+
+<section>
+    <h2 class="section__title reveal">About Me</h2>
+    <span class="section__subtitle reveal delay-1">My Introduction</span>
+
+    <div class="about__container">
+        <!-- Illustration -->
+        <div class="about__illustration reveal delay-2" aria-hidden="true">
+            <HumanOnDesk />
+        </div>
+
+        <!-- Content -->
+        <div class="about__content leading-relaxed max-w-prose">
+            <p class="about__description reveal delay-2">
+                I hold a BSc in ICT with a major in Software Engineering. My
+                passion lies in web technologies and UI/UX design
+                <br />
+                However, my expertise is not limited to Front-End Development.
+                <br />
+                Much of my career has focused on Back-End Development, utilizing languages
+                such as C, Java, and Python.
+            </p>
+
+            <p class="about__quote reveal delay-3">
+                &quot;Munthu osamangokhala ayi, lol&quot; -Uchindami
+            </p>
+
+            <!-- Stats -->
+            <div class="about__stats">
+                {
+                    stats.map((stat, index) => (
+                        <div class={`about__stat reveal delay-${index + 3}`}>
+                            <span class="about__stat-value">{stat.value}</span>
+                            <span class="about__stat-label">{stat.label}</span>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Download CV Button -->
+            <div class="about__actions reveal delay-5">
+                <a
+                    href={resumePdf}
+                    class="button "
+                    download="Uchindami_CV.pdf"
+                >
+                    Download CV
+                    <PiDownloadDuotone className="button__icon" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

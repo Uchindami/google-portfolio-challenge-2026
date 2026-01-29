@@ -1,0 +1,124 @@
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #e5e5e5;
+  --accent-color: #00ff9d;
+  --secondary-color: #64748b;
+  --card-bg: #171717;
+  --card-hover: #262626;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 4rem;
+}
+
+.glitch {
+  font-size: 3rem;
+  font-weight: 700;
+  position: relative;
+  color: var(--text-color);
+}
+
+.subtitle {
+  color: var(--secondary-color);
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  background-color: var(--card-hover);
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0, 255, 157, 0.1);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: #262626;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.command {
+  color: var(--accent-color);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: #000;
+  border-radius: 6px;
+}
+
+.description {
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+footer {
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.heart {
+  color: #ff4757;
+}
+
+@media (max-width: 768px) {
+  .choices {
+    grid-template-columns: 1fr;
+  }
+
+  .glitch {
+    font-size: 2.5rem;
+  }
+}

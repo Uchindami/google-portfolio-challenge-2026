@@ -1,0 +1,88 @@
+---
+/**
+ * SEO Meta Component
+ * Centralized SEO metadata for all pages
+ */
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    type?: "website" | "article";
+    noindex?: boolean;
+}
+
+const {
+    title,
+    description = "Uchindami - FullStack Developer specializing in web technologies, UI/UX design, and creating exceptional digital experiences.",
+    image = "/favicon.png",
+    type = "website",
+    noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.site);
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageURL} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImageURL} />
+
+<!-- JSON-LD Structured Data -->
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": `${Astro.site}#website`,
+                url: Astro.site,
+                name: title,
+                description: description,
+                publisher: {
+                    "@id": `${Astro.site}#person`,
+                },
+                potentialAction: {
+                    "@type": "SearchAction",
+                    target: `${Astro.site}?q={search_term_string}`,
+                    "query-input": "required name=search_term_string",
+                },
+            },
+            {
+                "@type": "Person",
+                "@id": `${Astro.site}#person`,
+                name: "Uchindami",
+                url: Astro.site,
+                image: socialImageURL,
+                sameAs: [
+                    "https://github.com/Uchindami",
+                    "https://linkedin.com/in/manfred-chirambo",
+                    "https://twitter.com/Local_Boyfriend",
+                ],
+                jobTitle: "FullStack Developer",
+                worksFor: {
+                    "@type": "Organization",
+                    name: "Freelance",
+                },
+            },
+        ],
+    })}
+/>

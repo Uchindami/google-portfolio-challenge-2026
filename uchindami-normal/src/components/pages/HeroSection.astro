@@ -1,0 +1,86 @@
+---
+import {
+    PiArrowDownDuotone,
+    PiChatsCircleDuotone,
+    PiGithubLogoDuotone,
+    PiLinkedinLogoDuotone,
+    PiTwitterLogoDuotone,
+} from "react-icons/pi";
+import Logo from "@/assets/icons/uchindami-logo.astro";
+
+const socialLinks = [
+    {
+        name: "LinkedIn",
+        url: "https://linkedin.com/in/manfred-chirambo",
+        ariaLabel: "LinkedIn Profile",
+        icon: PiLinkedinLogoDuotone,
+    },
+    {
+        name: "Twitter",
+        url: "https://twitter.com/Local_Boyfriend",
+        ariaLabel: "Twitter Profile",
+        icon: PiTwitterLogoDuotone,
+    },
+    {
+        name: "GitHub",
+        url: "https://github.com/Uchindami",
+        ariaLabel: "GitHub Profile",
+        icon: PiGithubLogoDuotone,
+    },
+];
+---
+
+<section>
+    <div class="hero_content container">
+            {/* Social Links */}
+            <nav class="hero_social" aria-label="Social media links">
+                {
+                    socialLinks.map((link, index) => (
+                        <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={`hero_social_link reveal delay-${index + 1}`}
+                            aria-label={link.ariaLabel}
+                        >
+                            <link.icon aria-hidden="true" />
+                        </a>
+                    ))
+                }
+            </nav>
+
+            {/* Logo */}
+            <div class="hero_logo reveal delay-1" aria-label="Uchindami logo">
+                <Logo />
+            </div>
+
+            {/* Hero Content */}
+            <div class="my-4 hero_data flex flex-col gap-2 prose lg:prose-xl">
+                <h1 class="reveal delay-2">
+                    Full-Stack Engineer & AI Solution Architect
+                </h1>
+                <p class="hero_description reveal delay-3 prose lg:prose-xl">
+                    This site was deployed in 2019, I was in Second year at
+                    Daeyang University. Oh how time flies
+                    <br />
+                    I have made subtle changes over the years
+                    <br />
+                    It was in HTML and css, I re-wrote it in Astro in 2021
+                </p>
+                <div class="hero_badges reveal delay-4">
+                    <span class="hero_badge">BSc CS</span>
+                    <span class="hero_badge">CCA</span>
+                    <span class="hero_badge">ML/AI Engineer</span>
+                    <span class="hero_badge">Software Engineer</span>
+                </div>
+                <a href="#contact" class="button  reveal delay-5">
+                    Contact Me
+                    <PiChatsCircleDuotone
+                        className="button__icon"
+                        aria-hidden="true"
+                    />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

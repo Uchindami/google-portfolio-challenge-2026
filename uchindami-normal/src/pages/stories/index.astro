@@ -1,0 +1,164 @@
+---
+/**
+ * Stories (Khani) Section
+ * Interactive story-telling platform - Coming Soon
+ */
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/global.css";
+---
+
+<Layout title="Khani - Interactive Stories" page="home">
+    <main class="stories-page">
+        <div class="stories-page__hero">
+            <div class="stories-page__stars" aria-hidden="true"></div>
+
+            <div class="stories-page__content">
+                <h1 class="stories-page__title">
+                    Welcome to <span class="stories-page__brand">Khani</span>
+                </h1>
+                <p class="stories-page__subtitle">
+                    An interactive story-telling platform
+                </p>
+
+                <div class="stories-page__status">
+                    <span class="stories-page__badge">Coming Soon</span>
+                </div>
+
+                <div class="stories-page__preview">
+                    <h2 class="stories-page__preview-title">
+                        The first interactive Khani
+                    </h2>
+                    <p class="stories-page__preview-name">X-VIII</p>
+                    <p class="stories-page__preview-note">
+                        I've been busy recently, not a lot of time to work on my
+                        projects. But that's no excuse - stay tuned!
+                    </p>
+                </div>
+
+                <a href="/" class="stories-page__back"> ← Back to Portfolio </a>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .stories-page {
+        min-height: 100vh;
+        background: linear-gradient(
+            135deg,
+            #0c0c0c 0%,
+            #1a1a2e 50%,
+            #243642 100%
+        );
+    }
+
+    .stories-page__hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stories-page__stars {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://awv3node-homepage.surge.sh/build/assets/stars.svg");
+        background-size: cover;
+        opacity: 0.3;
+        animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+        from {
+            opacity: 0.2;
+        }
+        to {
+            opacity: 0.4;
+        }
+    }
+
+    .stories-page__content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+    }
+
+    .stories-page__title {
+        font-size: clamp(2rem, 8vw, 4rem);
+        color: white;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    .stories-page__brand {
+        background: linear-gradient(135deg, #f2e5bf, #c68b59);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stories-page__subtitle {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2rem;
+    }
+
+    .stories-page__status {
+        margin-bottom: 3rem;
+    }
+
+    .stories-page__badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 9999px;
+        color: #f2e5bf;
+        font-size: 0.875rem;
+        font-weight: 500;
+        backdrop-filter: blur(4px);
+    }
+
+    .stories-page__preview {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(8px);
+    }
+
+    .stories-page__preview-title {
+        font-size: 1.25rem;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .stories-page__preview-name {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #c68b59;
+        margin-bottom: 1rem;
+    }
+
+    .stories-page__preview-note {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+    }
+
+    .stories-page__back {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.875rem;
+        transition: color 0.2s;
+    }
+
+    .stories-page__back:hover {
+        color: white;
+    }
+</style>

@@ -1,0 +1,107 @@
+---
+/**
+ * Tag Page
+ * Shows all posts with a specific tag
+ */
+import Layout from "../../layouts/Layout.astro";
+import BlogPost from "../../components/blog/BlogPost.astro";
+import "../../styles/global.css";
+import "../../styles/blogStyles.css";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob("../posts/*.md");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.frontmatter.tags.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout title={`Posts tagged: ${tag}`} page="blog">
+  <main class="tag-page">
+    <header class="tag-page__header">
+      <a href="/blog" class="tag-page__back">← Back to Blog</a>
+      <h1 class="tag-page__title">
+        Posts tagged with <span class="tag-page__tag">{tag}</span>
+      </h1>
+      <p class="tag-page__count">
+        {posts.length} post{posts.length !== 1 ? "s" : ""}
+      </p>
+    </header>
+
+    <div class="tag-page__grid">
+      {
+        posts.map((post: any) => (
+          <BlogPost
+            url={post.url}
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            image={post.frontmatter.image}
+            date={post.frontmatter.pubDate}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .tag-page {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .tag-page__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .tag-page__back {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+
+  .tag-page__back:hover {
+    color: #333;
+  }
+
+  .tag-page__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #1e1e1e;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag-page__tag {
+    color: #845339;
+    background-color: #f0e6db;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .tag-page__count {
+    color: #666;
+    font-size: 0.875rem;
+  }
+
+  .tag-page__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+</style>

@@ -46,4 +46,7 @@ impl Theme {
     
     /// Selected/active item foreground
     pub const SELECTED_FG: Color = Color::Rgb(18, 18, 18); // #121212
+
+    /// 
+    pub const GUEST: Color = Color::Rgb(62, 63, 91); // #3E3F5B
 }

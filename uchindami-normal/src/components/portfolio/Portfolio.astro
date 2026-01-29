@@ -1,0 +1,97 @@
+---
+/**
+ * Portfolio Section
+ * Premium "Industrial Stack" layout with hover-triggered reveals
+ */
+import { projects } from "./data";
+import {
+    PiArrowRightDuotone,
+    PiGithubLogoDuotone,
+    PiArrowSquareOutDuotone,
+} from "react-icons/pi";
+import { Image } from "astro:assets";
+import "./portfolio.css";
+---
+
+<section>
+    <div class="container">
+        <h2 class="section__title reveal">Selected Works</h2>
+        <span class="section__subtitle reveal delay-1"
+            >Innovation through experience</span
+        >
+
+        <div class="portfolio__grid">
+            {
+                projects.map((project, index) => (
+                    <article
+                        class={`portfolio__card ${project.featured ? "is-featured" : ""} reveal delay-${index + 2}`}
+                    >
+                        {project.featured && (
+                            <div class="portfolio__badge">Selected Focus</div>
+                        )}
+
+                        {/* Title & Index */}
+                        <div class="portfolio__header">
+                            <span class="portfolio__index">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <h3 class="portfolio__title">{project.title}</h3>
+                        </div>
+
+                        {/* Floating Image Window */}
+                        <div class="portfolio__image-container">
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                class="portfolio__image"
+                                width={400}
+                                height={250}
+                            />
+                        </div>
+                        {/* Revealed Content */}
+                        <div class="portfolio__content">
+                            <p class="portfolio__description">
+                                {project.description}
+                            </p>
+
+                            <div class="portfolio__tags" role="list">
+                                {project.tags.map((tag) => (
+                                    <span
+                                        class="portfolio__tag"
+                                        role="listitem"
+                                    >
+                                        / {tag}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <div class="portfolio__actions">
+                                <a
+                                    href={project.links.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="portfolio__link-btn"
+                                >
+                                    <PiGithubLogoDuotone />
+                                    <span>Source Code</span>
+                                </a>
+
+                                {project.links.live !== "#" && (
+                                    <a
+                                        href={project.links.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="portfolio__link-btn"
+                                    >
+                                        <PiArrowSquareOutDuotone />
+                                        <span>Live Demo</span>
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>

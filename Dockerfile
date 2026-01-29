@@ -1,32 +1,53 @@
 # Stage 1: Build Rust binary
-FROM rustlang/rust:nightly-alpine AS builder
-
+FROM rustlang/rust:nightly-alpine AS rust-builder
 RUN apk add --no-cache musl-dev
-
 WORKDIR /app
 COPY Cargo.toml Cargo.lock* ./
 COPY src ./src
-
 RUN cargo build --release
 
-# Stage 2: Runtime with ttyd
-FROM alpine:3.21
+# Stage 2: Build Astro static site
+FROM node:lts-alpine AS astro-builder
+WORKDIR /app
+COPY uchindami-normal/package.json uchindami-normal/bun.lock* ./
+# Using npm since bun might not be in standard node image, or install bun
+RUN npm install
+COPY uchindami-normal .
+# Build Astro with base path /web
+RUN npm run build
 
-# Install ttyd for web terminal access
-RUN apk add --no-cache ttyd
+# Stage 3: Runtime
+FROM alpine:3.19
 
-# Copy the compiled binary
-COPY --from=builder /app/target/release/portfolio /usr/local/bin/portfolio
+# Install runtime dependencies
+RUN apk add --no-cache \
+    ttyd \
+    nginx \
+    supervisor \
+    libgcc
 
-# Create non-root user for security
-RUN adduser -D -s /bin/sh portfolio
-USER portfolio
+# Create directories
+RUN mkdir -p /var/www/landing \
+    /var/www/astro \
+    /var/log/supervisor \
+    /run/nginx
+
+# Copy Rust binary
+COPY --from=rust-builder /app/target/release/portfolio /usr/local/bin/portfolio
+
+# Copy Astro build
+COPY --from=astro-builder /app/dist /var/www/astro
+
+# Copy Landing page
+COPY landing /var/www/landing
+
+# Copy configurations
+COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Permissions
+RUN chown -R nginx:nginx /var/www
 
 EXPOSE 8080
 
-# ttyd options:
-# -p 8080: Port
-# --writable: Allow input
-# -t fontSize=16: Terminal font size
-# -t fontFamily=monospace: Font
-CMD ["ttyd", "-p", "8080", "--writable", "-t", "fontSize=16", "-t", "fontFamily=JetBrains Mono,monospace", "portfolio"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

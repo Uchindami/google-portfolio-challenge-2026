@@ -1,0 +1,103 @@
+---
+import {
+    PiGithubLogoDuotone,
+    PiLinkedinLogoDuotone,
+    PiTwitterLogoDuotone,
+} from "react-icons/pi";
+---
+
+<footer>
+    <div class="container mt-36">
+        <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start text-center md:text-left"
+        >
+            {/* Logo & Title Section */}
+            <div>
+                <h1 class="footer__title">Uchindami</h1>
+                <span class="footer__subtitle">Full-Stack Developer</span>
+            </div>
+
+            {/* Quick Links Section */}
+            <div class="flex flex-col items-center">
+                <ul class="flex flex-wrap justify-center gap-8">
+                    <li>
+                        <a
+                            href="#services"
+                            class="text-sm font-medium hover:text-primary transition-colors hover:underline underline-offset-8 decoration-2"
+                            >Services</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#portfolio"
+                            class="text-sm font-medium hover:text-primary transition-colors hover:underline underline-offset-8 decoration-2"
+                            >Portfolio</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#contact"
+                            class="text-sm font-medium hover:text-primary transition-colors hover:underline underline-offset-8 decoration-2"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            {/* Socials Section */}
+            <div class="flex flex-col items-center md:items-end gap-4">
+                <div class="flex items-center gap-4">
+                    <a
+                        href="https://linkedin.com/in/manfred-chirambo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-3 rounded-xl bg-surface/30 border border-primary/5 hover:border-primary/20 hover:bg-surface/50 text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-lg active:scale-95"
+                        aria-label="LinkedIn Profile"
+                    >
+                        <PiLinkedinLogoDuotone size={20} />
+                    </a>
+                    <a
+                        href="https://twitter.com/Local_Boyfriend"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-3 rounded-xl bg-surface/30 border border-primary/5 hover:border-primary/20 hover:bg-surface/50 text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-lg active:scale-95"
+                        aria-label="Twitter Profile"
+                    >
+                        <PiTwitterLogoDuotone size={20} />
+                    </a>
+                    <a
+                        href="https://github.com/Uchindami"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-3 rounded-xl bg-surface/30 border border-primary/5 hover:border-primary/20 hover:bg-surface/50 text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-lg active:scale-95"
+                        aria-label="Github Profile"
+                    >
+                        <PiGithubLogoDuotone size={20} />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="mt-12 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+            <p
+                class="text-[10px] font-black uppercase tracking-widest text-primary"
+            >
+                &copy; {new Date().getFullYear()} Uchindami. All rights reserved.
+            </p>
+            <div
+                class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-primary/90"
+            >
+                <span
+                    class="hover:text-primary transition-colors cursor-default"
+                    >Privacy Policy</span
+                >
+                <span
+                    class="hover:text-primary transition-colors cursor-default"
+                    >Terms of Service</span
+                >
+            </div>
+        </div>
+    </div>
+</footer>

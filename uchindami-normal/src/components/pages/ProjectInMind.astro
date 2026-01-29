@@ -1,0 +1,31 @@
+---
+import { PiChatsCircleDuotone } from "react-icons/pi";
+import ContactUs from "../../assets/contactUs.svg?raw";
+---
+
+<section>
+    <div class="container">
+        <h2 class="section__title reveal">Do you have a Project?</h2>
+        <span class="section__subtitle reveal delay-1"
+            >Let's craft something special.</span
+        >
+        <div class="project__bg reveal ">
+            <div class="project__data">
+                <div class="project__header">
+                    <p class="project__description">
+                        Have an ambitious project in mind? I'm available for
+                        freelance partnerships and high-impact digital products.
+                    </p>
+                    <Fragment set:html={ContactUs} class="project__img" />
+                </div>
+
+                <div class="project__actions">
+                    <a href="#contact" class="project__button">
+                        <span>Start the Conversation</span>
+                        <PiChatsCircleDuotone className="button__icon" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

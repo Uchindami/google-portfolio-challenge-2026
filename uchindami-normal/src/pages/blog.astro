@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/blogStyles.css";
+import BlogHeader from "../components/blog/blog-header.tsx";
+import { BlogFooter } from "../components/blog/blog-footer";
+import { BlogArticles } from "../components/blog/blog-articles";
+import { TrendingTopics } from "../components/blog/trending-topics";
+import BlogLayout from "../components/pages/try.tsx";
+import { BlogLeftSidebar } from "../components/blog/blog-left-sidebar";
+import { Button } from "../components/ui/button";
+import { Clock, User } from "lucide-react";
+import { ScrollArea } from "../components/ui/scroll-area";
+const allPosts = await Astro.glob("../pages/posts/*.md");
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+---
+
+<Layout title="Uchindami's Blog" page="blog" className="!bg-[#E3E3E387]">
+  <div class="px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
+    <BlogHeader allPosts={allPosts} client:load />
+    <div class="flex flex-col items-center justify-center">
+      <div class="w-full flex items-center justify-center my-10">
+        <h1 class="text-base md:text-lg lg:text-2xl text-blog-secondary">
+          Welcome to my blog , my take on daily sh!@#
+        </h1>
+      </div>
+      <h1 class="text-base">Trending Topics</h1>
+      <div class="tags">
+        {
+          tags.map((tag) => (
+            <p class="tag">
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </p>
+          ))
+        }
+      </div>
+    </div>
+    <!--Main Section-->
+    <div class="px-3 mx-3">
+      <div class="flex flex-col lg:flex-row">
+        {/* BlogLeftSidebar - hidden on mobile */}
+        <BlogLeftSidebar />
+        <div class="mt-4">
+          {/* Trending Topics - hidden on mobile */}
+          <TrendingTopics />
+          <BlogArticles allPosts={allPosts} client:load />
+          {/* Blog Posts - Scrollable on desktop, normal scroll on mobile */}
+        </div>
+      </div>
+    </div>
+  </div>
+  <BlogFooter />
+</Layout>

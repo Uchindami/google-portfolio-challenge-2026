@@ -1,0 +1,97 @@
+---
+/**
+ * Tags Index Page
+ * Lists all available blog post tags
+ */
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/global.css";
+import "../../styles/blogStyles.css";
+
+const allPosts = await Astro.glob("../posts/*.md");
+const tags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+].sort();
+---
+
+<Layout title="All Tags" page="blog">
+    <main class="tags-page">
+        <header class="tags-page__header">
+            <a href="/blog" class="tags-page__back">← Back to Blog</a>
+            <h1 class="tags-page__title">All Tags</h1>
+            <p class="tags-page__count">
+                {tags.length} tag{tags.length !== 1 ? "s" : ""}
+            </p>
+        </header>
+
+        <div class="tags-page__grid">
+            {
+                tags.map((tag) => (
+                    <a href={`/tags/${tag}`} class="tags-page__tag">
+                        {tag}
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .tags-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem 4rem;
+    }
+
+    .tags-page__header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .tags-page__back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: #666;
+        font-size: 0.875rem;
+        transition: color 0.2s;
+    }
+
+    .tags-page__back:hover {
+        color: #333;
+    }
+
+    .tags-page__title {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        color: #1e1e1e;
+        margin-bottom: 0.5rem;
+    }
+
+    .tags-page__count {
+        color: #666;
+        font-size: 0.875rem;
+    }
+
+    .tags-page__grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .tags-page__tag {
+        padding: 0.5rem 1rem;
+        background-color: #f0e6db;
+        color: #845339;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+            background-color 0.2s,
+            transform 0.2s;
+    }
+
+    .tags-page__tag:hover {
+        background-color: #e5d5c5;
+        transform: translateY(-2px);
+    }
+</style>
