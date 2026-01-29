@@ -46,7 +46,7 @@ COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Permissions
-RUN rm -rf /etc/nginx/conf.d/default.conf /etc/nginx/http.d/default.conf && \
+RUN rm -rf /etc/nginx/conf.d/default.conf /etc/nginx/http.d/default.conf /usr/share/nginx/html /var/lib/nginx/html /var/www/localhost && \
     chown -R nginx:nginx /var/www
 
 EXPOSE 8080
