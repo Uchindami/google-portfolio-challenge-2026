@@ -3,47 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Uchindami | Choose Interface</title>
+    <title>Uchindami | Protocol Select</title>
     <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div class="glitch" data-text="uchindami.xyz">uchindami.xyz</div>
-        <p class="subtitle">Select your preferred interface protocol</p>
-      </header>
-
-      <div class="choices">
-        <a href="/web/" class="card normmy">
-          <div class="card-content">
-            <span class="badge">HTTP/2</span>
-            <h2>normmy</h2>
-            <p class="command">> i use http</p>
-            <p class="description">
-              Modern, responsive web portfolio built with Astro & React.
-            </p>
-          </div>
-        </a>
-
-        <a href="/terminal" class="card terminal">
-          <div class="card-content">
-            <span class="badge">SSH/WSS</span>
-            <h2>i use arch btw</h2>
-            <p class="command">> ssh uchindami@term</p>
-            <p class="description">
-              Interactive terminal environment powered by Rust & TUI.
-            </p>
-          </div>
-        </a>
-      </div>
-
-      <footer>
-        <p>Built with <span class="heart">❤</span> + Gemini + Cloud Run</p>
-      </footer>
+    <div class="spotlight-overlay">
+      <nav class="command-palette">
+        <div class="palette-header">
+          <span class="prompt">λ</span>
+          <span class="input-sim">Who are you?</span>
+        </div>
+        
+        <div class="options-list">
+          <a href="/web/" class="option">
+            <span class="key">1</span>
+            <span class="label">i am a normal person</span>
+            <span class="meta">  HTTP/HTML</span>
+          </a>
+          
+          <a href="/terminal" class="option">
+            <span class="key">2</span>
+            <span class="label">i use arch btw</span>
+            <span class="meta">SSH/TUI</span>
+          </a>
+        </div>
+      </nav>
     </div>
   </body>
 </html>
