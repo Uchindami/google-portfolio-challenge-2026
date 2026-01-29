@@ -1,0 +1,17 @@
+[package]
+name = "portfolio"
+version = "0.1.0"
+edition = "2024"
+authors = ["Uchindami"]
+description = "Interactive terminal portfolio"
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+color-eyre = "0.6"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
