@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 
 export const Navigation = () => {
   const links = [
-    { href: "/", text: "Home", isIcon: false },
-    { href: "/blog", text: "Blog", isIcon: false },
-    { href: "/tags/", text: "Tags", isIcon: false },
+    { href: "/web/", text: "Home", isIcon: false },
+    { href: "/web/blog", text: "Blog", isIcon: false },
+    { href: "/web/tags/", text: "Tags", isIcon: false },
     {
-      href: "/rss.xml",
+      href: "/web/rss.xml",
       icon: <PiRssSimpleDuotone />,
       ariaLabel: "RSS Feed",
       rel: "noopener noreferrer",

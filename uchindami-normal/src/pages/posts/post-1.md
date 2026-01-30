@@ -8,10 +8,10 @@ description:
 author: "Sophia Rodriguez"
 image:
   alt: "A crowded bus stop in a busy city."
-  url: "/busyStreet.jpeg"
-tags: [ "urban planning", "public transit", "sustainability" ]
+  url: "/web/busyStreet.jpeg"
+tags: ["urban planning", "public transit", "sustainability"]
 readTime: 7
-mainTag: [ "Urban Development" ]
+mainTag: ["Urban Development"]
 ---
 
 <div className="mx-w-lg font-roboto lg:max-w-5xl mx-auto p-4 sm:p-6 bg-blog-bento_bg">
@@ -36,8 +36,8 @@ Let's examine the root causes and propose innovative solutions for a more sustai
             </h3>
 <div class="text-blog_heading text-xs m-2"> Didn't Know what to put here honestly just thought the long div looks cool</div>
 
-
 <textarea placeholder="The website flow is Bento Grid, The article is by Sophia" class=" text-sm bg-blog-bento_box text-blog-bento_text p-2 h-full w-full p-1 border-2 border-blog-bento_heading outline outline-0 rounded-[7px]"></textarea>
+
 </div>
 
 <div className="col-span-1 sm:col-span-2 bg-blog-bento_box rounded-lg overflow-hidden ">

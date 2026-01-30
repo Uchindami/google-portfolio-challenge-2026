@@ -49,9 +49,6 @@ const bodyClass = cn(
         ) {
           return localStorage.getItem("theme");
         }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
         return "light";
       })();
 

@@ -4,9 +4,9 @@ export const BlogFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { href: "/", text: "Home" },
-    { href: "/#about", text: "About" },
-    { href: "/#contact", text: "Get In touch" },
+    { href: "/web/", text: "Home" },
+    { href: "/web/#about", text: "About" },
+    { href: "/web/#contact", text: "Get In touch" },
   ];
 
   return (

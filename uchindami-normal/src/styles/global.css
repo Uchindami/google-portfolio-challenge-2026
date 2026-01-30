@@ -77,6 +77,29 @@
   --transition-slow: 500ms ease;
 }
 
+/* Color Palette - Dark Theme */
+.dark {
+  --color-primary: 214 173 138; /* #D6AD8A - Warm gold/clay */
+  --color-secondary: 198 139 89; /* #C68B59 */
+  --color-background: 18 16 14; /* #12100E - Deep Espresso */
+  --color-surface: 31 26 23; /* #1F1A17 - Deep Clay */
+  --color-text: 245 235 224; /* #F5EBE0 - Creamy text */
+  --color-text-muted: 198 139 89; /* Use secondary for muted text */
+  --color-accent: 45 40 35; /* Subtle highlight */
+}
+
+/* Glassmorphism Dark Mode Refinement */
+.dark .glass {
+  background: rgb(var(--color-surface) / 0.7);
+  border-color: rgb(var(--color-primary) / 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dark .glass-hover:hover {
+  background: rgb(var(--color-surface) / 0.85);
+  border-color: rgb(var(--color-primary) / 0.3);
+}
+
 /* Responsive Typography */
 @media screen and (min-width: 968px) {
   :root {

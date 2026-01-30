@@ -5,7 +5,7 @@ import {
   PiBookOpenDuotone,
   PiUserDuotone,
   PiBriefcaseDuotone,
-  PiChatCircleTextDuotone
+  PiChatCircleTextDuotone,
 } from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 import type { NavItem } from "@/lib/types";
@@ -16,11 +16,13 @@ interface FloatingNavBarProps {
 }
 
 const navigation: NavItem[] = [
-  { name: "Home", link: "/", icon: PiHouseDuotone },
-  { name: "Blog", link: "/blog", icon: PiBookOpenDuotone },
+  { name: "Home", link: "/web/", icon: PiHouseDuotone },
+  { name: "Blog", link: "/web/blog", icon: PiBookOpenDuotone },
 ];
 
-export default function FloatingNavBar({ variant = "home" }: FloatingNavBarProps) {
+export default function FloatingNavBar({
+  variant = "home",
+}: FloatingNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeItem, setActiveItem] = useState("Home");
@@ -56,24 +58,24 @@ export default function FloatingNavBar({ variant = "home" }: FloatingNavBarProps
         animate={{
           y: isVisible ? 0 : 70, // Peek out by ~20-30% instead of hiding completely
           x: "-50%",
-          opacity: isVisible ? 1 : 0.4 // Keep it slightly transparent when peeking
+          opacity: isVisible ? 1 : 0.4, // Keep it slightly transparent when peeking
         }}
         exit={{ y: 100, x: "-50%", opacity: 0 }}
         transition={{
           duration: 0.8, // Slower, more lethargic animation
-          ease: [0.22, 1, 0.36, 1] // Custom quint ease for smoothness
+          ease: [0.22, 1, 0.36, 1], // Custom quint ease for smoothness
         }}
         className={cn(
           "fixed bottom-8 left-1/2 z-50",
           "px-4 py-3 rounded-full",
           "bg-primary/70 border border-primary/10 shadow-2xl",
           "flex items-center gap-2",
-          variant === "blog" && "bg-blog-nav_bg/30 border-blog-nav_hover/20"
+          variant === "blog" && "bg-blog-nav_bg/30 border-blog-nav_hover/20",
         )}
         style={{
-          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
         }}
         aria-label="Main navigation"
       >
@@ -89,7 +91,9 @@ export default function FloatingNavBar({ variant = "home" }: FloatingNavBarProps
                   onClick={() => setActiveItem(item.name)}
                   className={cn(
                     "relative flex items-center justify-center p-2.5 rounded-full transition-all duration-300 group",
-                    isActive ? "text-background" : "text-background hover:text-background/70"
+                    isActive
+                      ? "text-background"
+                      : "text-background hover:text-background/70",
                   )}
                   aria-label={item.name}
                 >
@@ -97,13 +101,19 @@ export default function FloatingNavBar({ variant = "home" }: FloatingNavBarProps
                     <motion.div
                       layoutId="nav-bg"
                       className="absolute inset-0 bg-background/10 rounded-full"
-                      transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.3,
+                        duration: 0.6,
+                      }}
                     />
                   )}
-                  <Icon className={cn(
-                    "w-6 h-6 relative z-10 transition-transform duration-300",
-                    isActive ? "scale-110" : "group-hover:scale-110"
-                  )} />
+                  <Icon
+                    className={cn(
+                      "w-6 h-6 relative z-10 transition-transform duration-300",
+                      isActive ? "scale-110" : "group-hover:scale-110",
+                    )}
+                  />
                 </a>
               </li>
             );

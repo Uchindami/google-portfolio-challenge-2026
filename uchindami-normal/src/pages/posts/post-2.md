@@ -8,10 +8,10 @@ description:
 author: "Manfred Chirambo"
 image:
   alt: "The full Astro logo."
-  url: "/waterMeter.png"
-tags: [ "astro", "blogging", "learning in public" ]
+  url: "/web/waterMeter.png"
+tags: ["astro", "blogging", "learning in public"]
 readTime: 5
-mainTag: [ "Bad Software?" ]
+mainTag: ["Bad Software?"]
 ---
 
 <div className="max-w-5xl mx-auto font-roboto p-4 sm:p-6 bg-blog-bento_bg">

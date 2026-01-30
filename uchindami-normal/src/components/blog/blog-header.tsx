@@ -17,7 +17,7 @@ export default function BlogHeader({ allPosts }) {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-xl font-bold text-blog-primary">
+            <a href="/web/" className="text-xl font-bold text-blog-primary">
               Uchindami
             </a>
           </div>
